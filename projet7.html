@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+  <!-------------------------------------->
+  <!-- HEAD : métadonnées + feuille CSS -->
+  <!-------------------------------------->
+  <head>
+    <meta charset="UTF-8"> <!-- Encodage : évite les caractères “cassés” (accents, etc.) -->
+    <title>Portfolio Florian Thyssen</title> <!-- Titre affiché dans l’onglet du navigateur -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Rend le site responsive (adaptation mobile/tablette) -->
+    <link rel="stylesheet" type="text/css" href="style/app.css">
+    <!-- CSS global du site (styles + animations + responsive) -->
+  </head>
+
+  
+
+  <!-------------------------------------------->
+  <!-- ARTICLE : contenu principal de la page -->
+  <!-------------------------------------------->
+  <article class="article">
+
+    <!-- HERO : en-tête éditorial (kicker + titre) -->
+    <div class="article__hero">
+      <h1 class="article__kicker">Expérience VR | Juin 2026</h1>
+      <!-- reveal-chars : le JS (fade-images.js) découpe le texte et anime l’apparition lettre par lettre -->
+      <h2 class="article__title reveal-chars">La Fenêtre de la Mémoire</h2>
+    </div>
+
+    <!-- Image “moyenne” (variante CSS image--medium) 
+    <img class="image image--small" src="assets/icons/icon1.png">-->
+
+  <div class="video-frame image">
+    <video controls preload="metadata" playsinline>
+      <source src="assets/video/projet7.mp4" type="video/mp4">
+      <!-- Message de secours si la vidéo n’est pas supportée -->
+      Votre navigateur ne supporte pas la lecture vidéo.
+    </video>
+  </div>
+
+    <!-- Paragraphes du corps :
+         - .article__body = typographie + largeur de lecture
+         - .fade-text = animation d’apparition quand l’élément entre dans le viewport -->
+    <p class="article__body fade-text">
+      C'est une expérience en réalité virtuel qui immerge le joueur dans la situation de son personnage. Il se retrouve donc allongé dans un cercueil qui va introduire
+      le gameplay à travers le casque de réalité virtuel. On y suit l'histoire d'une mère de famille qui assiste à ses propres funérailles pendant le 20e siècle.
+      Elle à l'occasion de voir son entourage à différentes temporalité de son époque. Ce qui nous permet nous de découvrir les différents personnages et les liens
+      qu'ils entretiennent avec notre personnage, Edith Gilbert.
+
+      <span class="line-break"></span> <!-- force un retour à la ligne -->
+
+      C'est un projet de fin d'étude réalisé en équipe de 3 personnes pour mon bachelier en arts plastiques, visuels et de l'espace dans les Arts numériques
+      à l’ESA Saint-Luc Bruxelles. De mon côté je me suis principalement concentré sur toute l'installation physique, la décoration du masque VR imprimé en 3D.
+      Je me suis occupé de l'audio dans le jeu. Notamment avec le doublage, les bruitages. Du côté de la musique, c'est William Escande qui l'é réalisé et je me suis occupé
+      de le guider afin de réalisé une bande-son adapté au jeu.
+      
+    </p>
+
+    <img class="image" src="assets/p7.1.JPG">
+    <img class="image" src="assets/p7.2.JPG">
+    <img class="image" src="assets/p7.3.JPG">
+    <img class="image" src="assets/p7.4.png">
+
+
+    <div class="liens-utiles">
+      <a href="index.html" class="bouton-lien">Retour</a><br />
+    </div>
+
+  </article>
+
+  </div>
+
+  <!-------------------------------------->
+  <!-- FOOTER : crédits -->
+  <!-------------------------------------->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <p class="footer-credits">
+        © 2026 — Florian Thyssen
+      </p>
+    </div>
+  </footer>
+
+  <!-------------------------------------->
+  <!-- SCRIPTS -->
+  <!-------------------------------------->
+  <!-- fade-images.js :
+       gère les animations (.fade-text, .fade-block, .reveal-chars, etc.) via IntersectionObserver -->
+  <script defer src="js/fade-images.js"></script>
+
+  <!-- menu.js :
+       gère l’ouverture/fermeture du menu hamburger en mobile
+       (ajoute/retire .is-menu-open sur le header, met à jour aria-expanded, etc.) -->
+  <script defer src="js/menu.js"></script>
+
+</body>
+</html>

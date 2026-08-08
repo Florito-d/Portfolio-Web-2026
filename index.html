@@ -1,0 +1,214 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+  <!-------------------------------------->
+  <!-- HEAD : métadonnées + feuille CSS -->
+  <!-------------------------------------->
+  <head>
+    <meta charset="UTF-8"> <!-- Encodage : évite les caractères “cassés” (accents, etc.) -->
+    <title>Portfolio Florian Thyssen</title> <!-- Titre affiché dans l’onglet du navigateur -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Rend le site responsive (adaptation mobile/tablette) -->
+    <link rel="stylesheet" type="text/css" href="style/app.css">
+    <!-- CSS global du site (styles + animations + responsive) -->
+  </head>
+
+<!----------------------------------------> 
+<!-- ARTICLE POUR LE CONTENU DE LA PAGE -->
+<!---------------------------------------->
+
+<!--
+  Petit script d'initialisation :
+  - Ajoute la classe "js" à la balise <html>.
+  - Sert à activer certains styles/animations CSS qui ne s’appliquent que si JavaScript est disponible.
+  - Exemple : animations "fade" ou "reveal" déclenchées au scroll.
+-->
+<script>
+  document.documentElement.classList.add("js");
+</script>
+
+<!--
+  Contenu principal de la page :
+  - La balise <article> regroupe tout le texte principal (structure sémantique).
+  - La classe "article" sert au style global : marges, largeur de lecture, placement sous le header, etc.
+-->
+<article class="article">
+
+  <!--
+    Bandeau d’introduction (hero) :
+    - Zone haute de la page qui présente le titre et le contexte.
+    - "article__hero" gère l’espacement, la mise en page et parfois une ligne décorative.
+  -->
+  <div class="article__hero">
+
+    <!--
+      Titre secondaire (kicker) :
+      - Sert de "sur-titre" pour donner le contexte court (ici : ULB ERASME).
+      - Souvent stylé en capitales / espacement de lettres.
+    -->
+    <h1 class="article__kicker">Artiste Numérique</h1>
+
+    <!--
+      Titre principal de la page :
+      - "article__title" gère la typographie (taille, centrage, largeur max).
+      - "reveal-chars" indique qu’une animation peut révéler les lettres au chargement/scroll.
+    -->
+    <h2 class="article__title reveal-chars">Portfolio Florian Thyssen</h2>
+  </div>
+
+    <img class="image"
+       src="assets/PDP1.jpg">
+
+  <p class="article__subtitle fade-text">
+    à propos de moi
+  </p>
+
+  <!--
+    Paragraphe principal :
+    - "article__body" applique une largeur de lecture confortable + taille de police + couleurs.
+    - "fade-text" anime l’apparition progressive.
+  -->
+  <p class="article__body fade-text">
+    Je suis Florian Thyssen, je suis né le 24 décembre 2003 et je suis diplômé d'un bachelier en arts plastiques, visuels et de l'espace dans les Arts numériques
+    à l’ESA Saint-Luc Bruxelles en Belgique. Je suis artiste numérique principalement axé sur l'animation et le dessin 2D. Mais j’explore d’autres domaines
+    également comme l’animation 3D, le jeu-vidéo, la photographie, etc... J’ai toujours eu cette volonté de progresser
+    dans mon domaine ou même dans d’autres domaines que j’explore moins.
+  </p>
+
+  <div class="article__hero">
+    <h1 class="article__title reveal-chars">Projets</h1>
+  </div>
+
+  <section class="collections-section" aria-labelledby="collections-title">
+    <div class="collections-inner">
+
+      <!--
+        GRILLE DE CARTES :
+        - .collections-grid : grille responsive (3 colonnes -> 2 -> 1 selon largeur).
+        - .collection-card : carte cliquable complète (a = lien).
+        - .fade-block : certaines cartes ont une animation “bloc” (opacité/translate).
+        - IMPORTANT : ton JS a aussi une logique “déclencher tout d’un coup” sur .collections-grid
+          (il ajoute .is-visible à la grille, ce qui révèle toutes les cartes en même temps).
+      -->
+      <div class="collections-grid js-stagger-grid">
+
+        <!-- Carte 1 (lien vers collection1.html) -->
+        <a class="collection-card" href="projet1.html">
+          <!--
+            Icone ronde :
+            - .collection-icon : taille fixe + border radius en cercle + object-fit.
+          -->
+          <img class="collection-icon" src="assets/icons/icon1.png" alt="">
+          <div class="collection-meta">
+            <!-- Nom + petit CTA -->
+            <div class="collection-name">Escapade</div>
+            <div class="collection-cta">Animation 3D | Janvier 2025</div>
+          </div>
+        </a>
+
+        <!-- Cartes suivantes : même structure, avec .fade-block pour l’animation -->
+        <a class="collection-card fade-block" href="projet2.html">
+          <img class="collection-icon" src="assets/icons/icon2.png" alt="">
+          <div class="collection-meta">
+            <div class="collection-name">Les échos de la vapeur</div>
+            <div class="collection-cta">Animation 2D | Janvier 2025</div>
+          </div>
+        </a>
+
+        <a class="collection-card fade-block" href="projet5.html">
+          <img class="collection-icon" src="assets/icons/icon5.png" alt="">
+          <div class="collection-meta">
+            <div class="collection-name">Rift Conquest</div>
+            <div class="collection-cta">Jeux-vidéo | Janvier 2025</div>
+          </div>
+        </a>
+
+        <a class="collection-card fade-block" href="projet3.html">
+          <img class="collection-icon" src="assets/icons/icon3.png" alt="">
+          <div class="collection-meta">
+            <div class="collection-name">Tentacules et sortilèges</div>
+            <div class="collection-cta">Storyboard et Character design | Juin 2025</div>
+          </div>
+        </a>
+
+        <a class="collection-card fade-block" href="projet4.html">
+          <img class="collection-icon" src="assets/icons/icon4.png" alt="">
+          <div class="collection-meta">
+            <div class="collection-name">J'attendrais</div>
+            <div class="collection-cta">Animation 2D | Juin 2025</div>
+          </div>
+        </a>
+
+        <a class="collection-card fade-block" href="projet6.html">
+          <img class="collection-icon" src="assets/icons/icon6.png" alt="">
+          <div class="collection-meta">
+            <div class="collection-name">Cubes d'identité</div>
+            <div class="collection-cta">Jeux-vidéo | Mai 2026</div>
+          </div>
+        </a>
+
+                <a class="collection-card fade-block" href="projet7.html">
+          <img class="collection-icon" src="assets/icons/icon7.png" alt="">
+          <div class="collection-meta">
+            <div class="collection-name">La fênetres de la mémoire</div>
+            <div class="collection-cta">Expérience VR | Juin 2026</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</article>
+
+
+<div class="socials">
+    <a href="https://www.instagram.com/flox.san/" target="_blank">
+        <img src="assets/icons/instagram.png" class="site-logo" alt="Instagram">
+    </a>
+
+    <a href="https://www.youtube.com/channel/UCe4KETuQGzNhfvYsSoX4B8w" target="_blank">
+        <img src="assets/icons/youtube.png" class="site-logo" alt="Instagram">
+    </a>
+
+    <a href="https://www.artstation.com/flox_san" target="_blank">
+        <img src="assets/icons/artstation.png" class="site-logo" alt="Instagram">
+    </a>
+
+    <a href="https://www.linkedin.com/in/florian-thyssen-913b87392/" target="_blank">
+        <img src="assets/icons/linkedin.png" class="site-logo" alt="Instagram">
+    </a>
+</div>
+
+
+
+</div>
+
+
+  <!-------------------------------------->
+  <!-- FOOTER : crédits -->
+  <!-------------------------------------->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <p class="footer-credits">
+        © 2026 —
+        <a href="https://canva.link/n2it55j9n6t19z7" target="_blank" rel="noopener">
+        Florian Thyssen
+        </a>
+      </p>
+    </div>
+  </footer>
+  
+  <!-------------------------------------->
+  <!-- SCRIPTS -->
+  <!-------------------------------------->
+  <!-- fade-images.js :
+       gère les animations (.fade-text, .fade-block, .reveal-chars, etc.) via IntersectionObserver -->
+  <script defer src="js/fade-images.js"></script>
+
+  <!-- menu.js :
+       gère l’ouverture/fermeture du menu hamburger en mobile
+       (ajoute/retire .is-menu-open sur le header, met à jour aria-expanded, etc.) -->
+  <script defer src="js/menu.js"></script>
+
+</body>
+</html>

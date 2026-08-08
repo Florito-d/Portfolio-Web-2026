@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+  <!-------------------------------------->
+  <!-- HEAD : métadonnées + feuille CSS -->
+  <!-------------------------------------->
+  <head>
+    <meta charset="UTF-8"> <!-- Encodage : évite les caractères “cassés” (accents, etc.) -->
+    <title>Portfolio Florian Thyssen</title> <!-- Titre affiché dans l’onglet du navigateur -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Rend le site responsive (adaptation mobile/tablette) -->
+    <link rel="stylesheet" type="text/css" href="style/app.css">
+    <!-- CSS global du site (styles + animations + responsive) -->
+  </head>
+
+  
+
+  <!-------------------------------------------->
+  <!-- ARTICLE : contenu principal de la page -->
+  <!-------------------------------------------->
+  <article class="article">
+
+    <!-- HERO : en-tête éditorial (kicker + titre) -->
+    <div class="article__hero">
+      <h1 class="article__kicker">Animation 2D | Juin 2025</h1>
+      <!-- reveal-chars : le JS (fade-images.js) découpe le texte et anime l’apparition lettre par lettre -->
+      <h2 class="article__title reveal-chars">J'attendrais</h2>
+    </div>
+
+    <!-- Image “moyenne” (variante CSS image--medium) 
+    <img class="image image--small" src="assets/icons/icon1.png">-->
+
+  <div class="video-frame image">
+    <video controls preload="metadata" playsinline>
+      <source src="assets/video/projet4.mp4" type="video/mp4">
+      <!-- Message de secours si la vidéo n’est pas supportée -->
+      Votre navigateur ne supporte pas la lecture vidéo.
+    </video>
+  </div>
+
+    <!-- Paragraphes du corps :
+         - .article__body = typographie + largeur de lecture
+         - .fade-text = animation d’apparition quand l’élément entre dans le viewport -->
+    <p class="article__body fade-text">
+      C'est une animation 2D réalisé lors de ma 2e année de bachelier en arts plastiques, visuels et de
+      l'espace dans les Arts numériques à l’ESA Saint-Luc Bruxelles. C'est un petit métrage dans lequel
+      on y voit un panda roux qui attends le bus qui ne viendra jamais. l'idée ici était de crée une animation
+      qui ressemble à des fonds d'écrans animé avec plusieurs petites animation dans la même scène qui donne vie
+      à la séquence. Le projet à globalement été réalisé avec le logiciel Procreate Dream et Procreate sur Ipad.
+      Le thème global était "Symphonie Chromatique". Ce qui faisait que le son était primodial dans ce projet. Ici,
+      on se concentre essentiellement sur le bruit de la pluie.
+    </p>
+
+    <div class="article__hero">
+      <h1 class="article__title reveal-chars">MindMap</h1>
+    </div>
+
+    <!-- Image plein format (classe .image standard) -->
+    <img class="image" src="assets/p4.1.png">
+
+    <!-- Zone de liens utiles :
+         bouton stylé via .bouton-lien -->
+    <div class="liens-utiles">
+      <a href="index.html" class="bouton-lien">Retour</a><br />
+    </div>
+
+  </article>
+
+  </div>
+
+  <!-------------------------------------->
+  <!-- FOOTER : crédits -->
+  <!-------------------------------------->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <p class="footer-credits">
+        © 2026 — Florian Thyssen
+      </p>
+    </div>
+  </footer>
+
+  <!-------------------------------------->
+  <!-- SCRIPTS -->
+  <!-------------------------------------->
+  <!-- fade-images.js :
+       gère les animations (.fade-text, .fade-block, .reveal-chars, etc.) via IntersectionObserver -->
+  <script defer src="js/fade-images.js"></script>
+
+  <!-- menu.js :
+       gère l’ouverture/fermeture du menu hamburger en mobile
+       (ajoute/retire .is-menu-open sur le header, met à jour aria-expanded, etc.) -->
+  <script defer src="js/menu.js"></script>
+
+</body>
+</html>

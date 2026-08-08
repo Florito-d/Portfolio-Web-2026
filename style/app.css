@@ -1,0 +1,1307 @@
+ /* =========================
+   VARIABLES GÉNÉRALES DU SITE
+   =========================
+   Variables CSS globales (couleurs) utilisées partout dans le site.
+   Objectif : centraliser la charte (plus simple à maintenir).
+*/
+
+:root {
+  --text: #e9e9ea;        /* couleur principale du texte */
+  --text-muted: #a3a8b0;  /* texte secondaire (gris) */
+  --accent: #4cc3c7;      /* couleur d’accent (liens, éléments interactifs) */
+  --accent-red: #000000;  /* accent alternatif (hover, alertes) */
+  /*--bone: #d7c9a3;*/
+  /*--panel-border: rgba(76, 195, 199, 0.25);*/
+}
+
+/* =========================
+   FOND GLOBAL + TYPO (BG PNG + VOILE)
+   =========================
+   - Applique un fond (image) sur toute la page
+   - Ajoute un voile sombre pour améliorer la lisibilité du texte
+   - Définit les réglages typographiques de base
+*/
+
+html, body{
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  color: var(--text);
+  font-family: Georgia, 'Times New Roman', serif;
+  -webkit-font-smoothing: antialiased;
+  background: none;
+}
+
+/* Fond image fixe (derrière tout le contenu) */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  background-image: url("../assets/bg.png"); /* image de fond principale */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* effet “parallax” (fond statique au scroll) */
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Voile sombre par-dessus l’image (toujours derrière le contenu) */
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45); /* noir semi-transparent */
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Sur mobile, on évite certains comportements instables du background-attachment: fixed */
+@media (max-width: 768px){
+  html, body{
+    background-attachment: scroll;
+  }
+}
+
+/* =========================
+   HEADER (NAV + LOGO)
+   =========================
+   Header fixe en haut de page :
+   - logo à gauche
+   - navigation à droite
+*/
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 11; /* au-dessus du contenu (et au-dessus du window-help) */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  height: 80px;
+  color: var(--text);
+  background: rgb(32, 29, 24);
+  transition: all 0.2s;
+}
+
+.socials {
+    display: flex;
+    justify-content: center; /* centre horizontalement */
+    align-items: center;     /* aligne verticalement */
+    gap: 25px;               /* espace entre les icônes */
+    width: 100%;
+}
+
+/* Logo (image) dans le header */
+.site-logo {
+  height: 150px;     /* taille “théorique” */
+  max-height: 75px;  /* plafonné par la hauteur du header */
+  width: auto;
+}
+
+.site-logo:hover {
+    transform: scale(1.08);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
+}
+
+/* Texte accessible invisible (lecteurs d’écran) */
+.screen-reader-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Conteneur du menu desktop */
+.main-navigation {
+  display: flex;
+  align-items: center;
+}
+
+/* Liste des liens (desktop : horizontale) */
+.main-navigation ul {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+/* Style des liens de navigation */
+.main-navigation a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  white-space: nowrap;
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+.main-navigation a:hover {
+    opacity: 0.8;
+}
+
+/* =========================
+   NAVIGATION MOBILE (du header)
+   =========================
+   Empilement vertical des liens si jamais le menu est visible en mobile.
+   (Le “vrai” affichage mobile est géré plus bas via le hamburger.)
+*/
+@media (max-width: 768px){
+  .main-navigation ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-navigation a {
+    margin: 0;
+  }
+}
+
+/* =========================
+   MENU HAMBURGER (MOBILE)
+   =========================
+   - Le bouton hamburger (.menu-access) devient visible sur mobile
+   - La navigation est masquée par défaut
+   - La classe .is-menu-open sur le header affiche le menu déroulant
+*/
+
+@media (max-width: 768px){
+
+  .menu-access{
+    display: block !important;
+  }
+
+  .main-navigation{
+    display: none; /* caché tant que le menu n’est pas ouvert */
+    width: 100%;
+  }
+
+  .site-header.is-menu-open .main-navigation{
+    display: block;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+
+    padding: 24px 20px;
+    box-sizing: border-box;
+
+    background: rgb(20, 19, 15);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* liens empilés */
+  .main-navigation ul{
+    max-width: 320px;
+    margin: 0 auto;
+    padding: 16px 0;
+
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .main-navigation a{
+    margin: 0;
+  }
+}
+
+/* Sur desktop : on force l’affichage du menu horizontal et on masque le hamburger */
+@media (min-width: 769px){
+  .menu-access{ display: none !important; }
+  .main-navigation{ display: flex; }
+}
+
+
+/* =========================
+   HAMBURGER (BASE)
+   =========================
+   Bouton hamburger : 4 barres (correspond à ton HTML).
+*/
+
+.menu-access{
+  display: none;
+  width: 44px;
+  height: 34px;
+  position: relative;
+  margin-right: 16px;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+.menu-access span{
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  height: 2px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 2px;
+}
+
+/* 4 barres */
+.menu-access span:nth-child(1){ top: 9px; }
+.menu-access span:nth-child(2){ top: 15px; }
+.menu-access span:nth-child(3){ top: 21px; }
+.menu-access span:nth-child(4){ top: 27px; }
+
+/* =========================
+   FOOTER / CRÉDITS
+   =========================
+   Bandeau de bas de page : crédits, look discret, séparateur.
+*/
+.site-footer{
+  margin-top: 80px;
+  padding: 20px 10vw 16px;
+  background: rgba(0,0,0,0.10);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border-top: 1px solid rgba(255,255,255,0.03);
+  opacity: 1;
+
+  color: rgba(233,233,234,0.55);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Petite ligne décorative au-dessus du footer */
+.site-footer::before{
+  content: "";
+  display: block;
+  width: 60px;
+  height: 1px;
+  margin: 0 auto 18px auto;
+  background: rgba(155,144,120,0.5);
+}
+
+.footer-inner{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 10vw;
+}
+
+.footer-credits{
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  opacity: 0.45;
+  text-transform: uppercase;
+  color: rgba(233,233,234,0.55);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* lien portfolio : discret, même couleur que le texte */
+.footer-credits a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.footer-credits a:hover {
+  color: rgba(255,255,255,0.95);
+  border-color: rgba(255,255,255,0.9);
+}
+
+@media (max-width: 768px){
+  .footer-credits{
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+}
+
+
+/* =========================
+   STRUCTURE GÉNÉRALE DE LA PAGE
+   =========================
+   .app : wrapper global
+   .article : contenu principal
+*/
+.app {
+  position: relative;
+  min-height: 100%;
+}
+
+.article {
+  position: relative;
+  width: 100%;
+  padding-bottom: 120px;
+}
+
+/* =========================
+   HERO (KICKER + TITRE + LIGNE)
+   =========================
+   Bloc “tête d’article” avec titre, sous-titre et ligne décorative.
+*/
+
+.article__hero {
+    position: relative;
+    padding: 96px 10vw 36px 10vw;
+
+}
+
+/* ligne fine sous le hero */
+.article__hero::after{
+  content:"";
+  position:absolute;
+  left:10vw;
+  right:10vw;
+  bottom:8px;
+  height:1px;
+  background: rgba(255,255,255,0.08);
+}
+
+.article__kicker {
+    text-align: center;
+    font-size: 1rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color:#9b9078;
+    margin: 0 0 0.75rem 0;
+    margin-top: 1.2rem;
+}
+
+/* Titre principal */
+.article__title {
+    font-size: 48px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 1.2rem;
+    
+    font-weight: 500;
+    max-width: 26ch;
+    text-transform: uppercase;
+}
+
+.article__title.reveal-chars{
+  justify-content: center;
+  text-align: center;
+}
+
+/* =========================
+   ANIM TITRE (REVEAL WORDS)
+   =========================
+   Animation “mot par mot” (gérée côté JS via .is-visible).
+*/
+
+.reveal-words {
+  overflow: hidden;
+}
+
+.reveal-words span {
+  display: inline-block;
+  margin-right: 0.25em; /* ← espace entre les mots */
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  filter: blur(1px);
+  transition:
+    opacity 500ms ease,
+    transform 500ms ease,
+    filter 500ms ease;
+}
+
+.reveal-words span:last-child {
+  margin-right: 0;
+}
+
+.reveal-words.is-visible span {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+  filter: blur(0);
+}
+
+/* Accessibilité : si l’utilisateur préfère moins d’animations */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-words span {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}
+
+/* =========================
+   ANIM TITRE (REVEAL CHARS)
+   =========================
+   Animation “lettre par lettre” (gérée côté JS via .is-visible).
+*/
+
+.reveal-chars{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.33em; /* espace ENTRE les mots, sans décalage */
+  line-height: 1.05;   /* un peu plus serré */
+  align-items: baseline;
+}
+
+/* variante plus compacte sur le titre */
+.article__title.reveal-chars{
+  line-height: 0.98;
+  letter-spacing: 0.02em;
+}
+
+/* chaque lettre */
+.reveal-chars .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.6em);
+  filter: blur(1px);
+  transition:
+    opacity 450ms ease,
+    transform 450ms ease,
+    filter 450ms ease;
+}
+
+/* Empêche la coupure au milieu d'un mots */
+.reveal-chars .word{
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.reveal-chars.is-visible .char {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Accessibilité */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-chars .char {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}
+
+/* =========================
+   SOUS-TITRES / CARTELS / MICRO-TEXTE
+   =========================
+   Styles pour sous-titres et petites légendes.
+*/
+
+.article__subtitle{
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-align: left;
+  margin: 3rem auto 2.5rem auto;
+  max-width: 720px;
+  position: relative;
+  position: static; /* neutralise toute déco héritée */
+}
+
+/* neutralise d’anciennes décorations (conservé mais vide) */
+.article__subtitle::before,
+.article__subtitle::after{
+  content: none;
+  display: block;
+  width: 60px;
+  height: 1px;
+  background: rgba(155,144,120,0.6);
+  margin: 16px auto;
+}
+
+/* micro-texte : cartels, CTA discrets */
+.text-caption{
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(155,144,120,0.8);
+}
+
+/* =========================
+   SOUS-TITRE DANS COLLECTION ET DANS VR
+   =========================
+   Sous-titre centré avec lignes décoratives (activé via JS : .is-visible)
+*/
+.collections-subtitle{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 48px;
+  color: var(--text-muted);
+  max-width: 50ch;
+  line-height: 1.5;
+
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 600ms ease 150ms;
+
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+/* lignes décoratives (haut/bas) */
+.collections-subtitle::before,
+.collections-subtitle::after{
+  content: "";
+  display: block;
+  width: 60px;
+  height: 1px;
+  background: rgba(155,144,120,0.6);
+
+  opacity: 0;
+  transform: scaleX(0.6);
+  transform-origin: center;
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+/* Espacements : ligne du haut au-dessus, ligne du bas en dessous */
+.collections-subtitle::before{
+  margin: 0 auto 18px auto;
+}
+
+.collections-subtitle::after{
+  margin: 18px auto 0 auto;
+}
+
+/* état visible déclenché par JS */
+.collections-subtitle.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.collections-subtitle.is-visible::before,
+.collections-subtitle.is-visible::after{
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Accessibilité */
+@media (prefers-reduced-motion: reduce){
+  .collections-subtitle,
+  .collections-subtitle::before,
+  .collections-subtitle::after{
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* =========================
+   TEXTE (ARTICLE-BODY)
+   =========================
+   Style du texte principal (largeur contrôlée et centrée).
+*/
+
+.article__body {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
+    line-height: 1.5;
+    max-width: 720px;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* helper layout si besoin d’un alignement centré */
+.colonne {
+    display: flex;
+    justify-content: center; /* horizontal */
+    align-items: center;     /* vertical */
+}
+
+/* =========================
+   ANIM (FADE TEXT)
+   =========================
+   Apparition progressive des paragraphes via JS (.is-visible).
+*/
+
+.fade-text {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 600ms ease, transform 600ms ease;
+  transition-delay: 80ms;
+  will-change: opacity, transform;
+}
+
+/* petits décalages si plusieurs éléments similaires se suivent */
+.fade-text:nth-of-type(2) { transition-delay: 120ms; }
+.fade-text:nth-of-type(3) { transition-delay: 160ms; }
+
+.fade-text.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Accessibilité */
+@media (prefers-reduced-motion: reduce) {
+  .fade-text {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* =========================
+   IMAGES / VIDÉOS
+   =========================
+   .image : style commun images/vidéos
+   .image--medium : variante plus petite
+   Anim d’apparition via JS (.is-visible)
+*/
+
+.image {
+    opacity: 1;
+    transform: none;
+    height: 440px;      /* ajuste la taille ici */
+    max-height: 500px;  /* laisse un peu de marge */
+    max-width: min(90vw, 900px);
+    margin: 0 auto 20px;   /* centre horizontalement */
+    display: block;
+    margin-top: 24px; /*pour laisser un espace entre les images*/
+    margin-bottom: 20px; /*pour laisser un espace entre les images*/
+}
+
+/* Variante image un peu plus compacte (ex: portraits, pictos plus grands) */
+.image--medium{
+  height: 360px;
+  max-height: 360px;
+  max-width: min(80vw, 640px);
+}
+
+.image--small{
+  height: 200px;
+  max-height: 200px;
+  max-width: min(80vw, 640px);
+}
+
+/* Vidéos réutilisent .image pour conserver le même rendu */
+video.image{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Conteneur optionnel pour vidéos (plafonne la largeur) */
+.video-frame{
+  max-width: 710px;      /* ← largeur du lecteur */
+}
+
+.video-frame video{
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  display: block;
+  border-radius: 12px;  /* optionnel */
+}
+
+/* Quand JS est actif : on prépare l’animation d’entrée */
+html.js .image{
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 700ms ease, transform 700ms ease;
+  will-change: opacity, transform;
+}
+
+html.js .image.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Accessibilité : réduit les animations si l’utilisateur le demande */
+@media (prefers-reduced-motion: reduce){
+  html.js .image{
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* =========================
+   BLOCS TEXTE + IMAGE INCRUSTÉE (FLOAT)
+   =========================
+   Système “image à droite/gauche dans un bloc texte”
+*/
+
+.bloc-texte{
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 10vw;
+  color: var(--text-muted);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.incrust{
+  width: 300px; /* taille */
+  height: auto;
+  border-radius: 10px; /* pour adoucir */
+}
+
+/* image incrustée à droite */
+.incrust.right{
+  float: right;
+  margin: 0 0 16px 16px;
+}
+
+/* image incrustée à gauche */
+.incrust.left{
+  float: left;
+  margin: 0 16px 16px 0;
+}
+
+/* version petite */
+.incrust.small{
+  width: 150px;
+  height: auto;
+  border-radius: 10px; /* pour adoucir */
+}
+
+.incrust.small.right{
+  float: right;
+  margin: 0 0 16px 16px;
+}
+
+.incrust.small.left{
+  float: left;
+}
+
+/* évite que le parent “s’effondre” à cause des floats */
+.bloc-texte::after{
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* sur mobile : on annule les floats -> image au-dessus, centrée */
+@media (max-width: 768px){
+  .incrust{
+    float: none !important;
+    display: block;
+    width: min(90%, 320px);
+    margin: 0 auto 16px auto;
+  }
+}
+
+/* =========================
+   ANIM (FADE BLOCK)
+   =========================
+   Animation d’entrée pour blocs entiers (.fade-block).
+*/
+
+.bloc-texte.fade-block{
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 700ms ease, transform 700ms ease;
+  will-change: opacity, transform;
+}
+
+.bloc-texte.fade-block.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Accessibilité */
+@media (prefers-reduced-motion: reduce){
+  .bloc-texte.fade-block{
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* règle générique pour tous les .fade-block si JS actif */
+html.js .fade-block{
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 700ms ease, transform 700ms ease;
+  will-change: opacity, transform;
+}
+
+html.js .fade-block.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce){
+  html.js .fade-block{
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* =========================
+   LIENS UTILES + BOUTONS
+   =========================
+   Boutons de navigation (ex: “Retour aux collections”).
+*/
+
+.liens-utiles {
+  margin-top: 20px;
+  text-align: center;
+  border: none;
+}
+
+.bouton-lien {
+  display: inline-block;
+  margin: 10px 15px;
+  padding: 10px 20px;
+  background-color: #9b9078;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
+  font-size: 16px;
+}
+
+/*visuel du bouton quand on passe le curseur dessus*/
+.bouton-lien:hover {
+  background-color: #9b9078;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+/* =========================
+   CONTACTS (PUCE / NOM)
+   =========================
+   Style pour les noms (petit point à gauche).
+*/
+
+.contact-name{
+  position: relative;
+  padding-left: 1.2em;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 0.6em;
+}
+
+/* le "point / tiret" */
+.contact-name::before{
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: rgba(155,144,120,0.9);
+}
+
+/* =========================
+   UTILITAIRES (RETOURS À LA LIGNE)
+   ========================= */
+
+.line-break{
+  display: block;
+  margin-top: 0.6em;
+}
+
+
+
+/* =========================
+   SECTION COLLECTIONS (musée)
+   =========================
+   Mise en page de la page “Collections” : grille de cartes + responsive.
+*/
+
+.collections-section{
+  padding: 30px 10vw 120px 10vw;  /* ↓ réduit le haut */
+  margin-top: 0;                 /* ↓ enlève l’ajout */
+}
+
+.collections-inner{
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* grille 3 colonnes */
+.collections-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* carte cliquable */
+.collection-card{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 18px 18px;
+  border-radius: 14px;
+
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+
+  text-decoration: none;
+  color: var(--text);
+
+  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+}
+
+.collection-card:hover{
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(155,144,120,0.55);
+}
+
+/* icône ronde */
+.collection-icon{
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.25);
+}
+
+.collection-icon:hover{
+  transform: scale(1.05);
+}
+
+/* texte à droite de l’icône */
+.collection-meta{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.collection-name{
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.collection-cta{
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(155,144,120,0.9);
+}
+
+/* responsive : 2 colonnes */
+@media (max-width: 980px){
+  .collections-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* responsive : 1 colonne */
+@media (max-width: 620px){
+  .collections-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .collection-card{
+    padding: 16px;
+  }
+}
+
+/* état caché par défaut des cartes (si JS actif) */
+html.js .collections-grid .collection-card{
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 700ms ease, transform 700ms ease;
+  will-change: opacity, transform;
+}
+
+/* quand la grille est visible : toutes les cartes s’activent d’un coup */
+html.js .collections-grid.is-visible .collection-card{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================
+   SKETCHFAB PLAYLIST (COLLECTIONS PAGE)
+   =========================
+   Intégration du player Sketchfab “playlist”.
+*/
+
+.sketchfab-section{
+  margin: 48px auto 0 auto;
+  max-width: 1100px;
+  padding: 0;
+  margin-bottom: 120px;
+}
+
+.sketchfab-frame{
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  margin-top: 32px;
+}
+
+.sketchfab-frame iframe{
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  max-height: 80vh; 
+  display: block;
+  border: 0;
+}
+
+
+/* légende sous la fenêtre Sketchfab */
+.sketchfab-caption{
+  margin: 14px 0 0 0;
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: rgba(233,233,234,0.65);
+}
+
+.sketchfab-caption a{
+  color: rgba(155,144,120,0.95);
+  font-weight: 600;
+  border-bottom: 1px solid transparent;
+}
+
+.sketchfab-caption a:hover{
+  border-color: rgba(155,144,120,0.55);
+}
+
+/* =========================
+   SKETCHFAB VIEWER (PAGE COLLECTION X)
+   =========================
+   Partie dédiée aux pages “collectionX.html” avec viewer plein écran.
+*/
+
+/* Fenêtre “tampon” (hauteur) utilisée comme zone de scroll */
+.window{
+  position: relative;
+  height: 140vh; /* tu peux réduire si tu veux */
+}
+
+/* Message d’aide (affiché/masqué via JS avec .is-active) */
+.window__help{
+  position: fixed;
+  left: 50%;
+  bottom: 100px;
+  transform: translateX(-50%);
+
+  max-width: 720px;
+  width: fit-content;
+
+  padding: 10px 14px;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text);
+
+  opacity: 0;
+  transform: translateX(-50%) translateY(6px);
+  transition: opacity 250ms ease, transform 250ms ease;
+  pointer-events: none;
+
+  z-index: 9; /* sous le header (11) */
+}
+
+.window__help.is-active{
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Ajustements mobile (centrage + largeur + anti-crop) */
+@media (max-width: 768px){
+  .window__help{
+    position: sticky;
+    bottom: 12px;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    margin: 0;
+    max-width: calc(100% - 32px);
+    width: fit-content;
+
+    text-align: center;
+  }
+
+  .window__help.viewer-help{
+    position: sticky;
+    bottom: 16px;
+
+    left: auto;
+    right: auto;
+    margin: 0 auto;
+
+    width: calc(100% - 32px);
+    max-width: 520px;
+    box-sizing: border-box;
+
+    font-size: 11px;
+    line-height: 1.35;
+    padding: 10px 12px;
+    text-align: center;
+
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* =========================
+   WINDOW HELP (MOBILE)
+   =========================
+   “Règle finale” mobile pour stabiliser l’affichage du message d’aide.
+*/
+
+@media (max-width: 768px){
+  .window__help{
+    position: fixed;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+
+    width: calc(100% - 32px);
+    max-width: 520px;
+    box-sizing: border-box;
+
+    text-align: center;
+
+    white-space: normal;
+    overflow-wrap: anywhere;
+
+    z-index: 9;
+  }
+}
+
+
+
+/* Viewer overlay plein écran (masqué par défaut, activé par JS via .visible) */
+.viewer {
+    position: fixed;
+    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .35s ease;
+    z-index: 10;
+}
+
+/* Cadre décoratif optionnel (sans bord visible actuellement) */
+.viewer::after {
+    content: "";
+    position: absolute;
+    inset: 6vh 6vw;
+    box-shadow: none;
+    pointer-events: none;
+}
+
+/* Quand le JS active le viewer (pendant la zone de scroll) */
+.viewer.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Conteneur interne (iframe + éléments éventuels) */
+.viewer__stage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Iframe Sketchfab dans le viewer */
+.viewer iframe {
+    border: 0;
+    width: min(90vw, 900px);
+    aspect-ratio: 16 / 9;
+    height: auto;
+    display: block;
+    
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+/* =========================
+   LIENS (GLOBAL)
+   =========================
+   Style des liens partout dans le site.
+*/
+a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent-red);
+    border-color: var(--accent-red);
+}
+
+/* Responsive : ajustements typographiques et du cadre viewer */
+@media screen and (max-width: 768px) {
+    .article__hero {
+        padding: 200px 30px 30px 30px;
+    }
+
+    .article__title {
+        font-size: 32px;
+    }
+
+    .article__body {
+        max-width: 100%;
+        margin: 1em 30px;
+        padding: 0 24px;
+        font-size: 1rem;
+    }
+
+    .viewer::after {
+        inset: 8vh 4vw;
+    }
+
+    /* règle mobile “force fixed” pour stabiliser le window-help sur certains mobiles */
+    .window__help{
+        position: fixed !important;
+
+        top: auto !important;
+        right: auto !important;
+
+        left: 50% !important;
+        bottom: 300px !important;
+        transform: translateX(-50%) !important;
+
+        width: calc(100% - 32px);
+        max-width: 520px;
+        box-sizing: border-box;
+
+        text-align: center;
+        white-space: normal;
+        overflow-wrap: anywhere;
+
+        z-index: 9;
+      }
+    }
