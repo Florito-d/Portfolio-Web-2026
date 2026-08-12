@@ -664,54 +664,89 @@ body::after{
 .image {
     opacity: 1;
     transform: none;
-    height: 440px;      /* ajuste la taille ici */
-    max-height: 500px;  /* laisse un peu de marge */
+
+    height: 440px;
+    max-height: 500px;
     max-width: min(90vw, 900px);
-    margin: 0 auto 20px;   /* centre horizontalement */
+
+    width: auto;
+    margin: 24px auto 20px;
+
     display: block;
-    margin-top: 24px; /*pour laisser un espace entre les images*/
-    margin-bottom: 20px; /*pour laisser un espace entre les images*/
 }
 
-/* Variante image un peu plus compacte (ex: portraits, pictos plus grands) */
-.image--medium{
-  height: 360px;
-  max-height: 360px;
-  max-width: min(80vw, 640px);
+
+.image--medium {
+    height: 360px;
+    max-height: 360px;
+    max-width: min(80vw, 640px);
+    width: auto;
 }
 
-.image--small{
-  height: 200px;
-  max-height: 200px;
-  max-width: min(80vw, 640px);
+
+.image--small {
+    height: 200px;
+    max-height: 200px;
+    max-width: min(80vw, 640px);
+    width: auto;
 }
+
+
+/* =========================
+   GALERIE 2 COLONNES
+   ========================= */
 
 .image-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+
     column-gap: 5px;
-    row-gap: 30px;
+    row-gap: 15px;
 
     width: 60%;
     max-width: 1100px;
     margin: 0 auto;
 }
 
+
 .image-grid .image {
     width: 100%;
-    height: 600px;
+    height: auto;
+
     max-width: none;
     max-height: none;
+
     margin: 0;
 
     display: block;
     object-fit: contain;
 }
 
+
+/* =========================
+   MOBILE IMAGE
+   ========================= */
+
 @media (max-width: 768px) {
+
     .image-grid {
         grid-template-columns: 1fr;
         width: 95%;
+        row-gap: 10px;
+    }
+
+    .image {
+        max-width: 95vw;
+    }
+
+    .image--medium {
+        max-width: 90vw;
+        height: auto;
+    }
+
+    .image--small {
+        max-width: 90vw;
+        height: auto;
     }
 }
 
