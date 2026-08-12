@@ -665,11 +665,12 @@ body::after{
     opacity: 1;
     transform: none;
 
-    height: 440px;
-    max-height: 500px;
-    max-width: min(90vw, 900px);
-
     width: auto;
+    height: auto;
+
+    max-width: min(90vw, 900px);
+    max-height: 500px;
+
     margin: 24px auto 20px;
 
     display: block;
@@ -677,18 +678,19 @@ body::after{
 
 
 .image--medium {
-    height: 360px;
-    max-height: 360px;
-    max-width: min(80vw, 640px);
     width: auto;
+    height: auto;
+
+    max-width: min(80vw, 640px);
+    max-height: 360px;
 }
 
-
 .image--small {
-    height: 200px;
-    max-height: 200px;
-    max-width: min(80vw, 640px);
     width: auto;
+    height: auto;
+
+    max-width: min(80vw, 640px);
+    max-height: 200px;
 }
 
 
@@ -736,17 +738,24 @@ body::after{
     }
 
     .image {
+        width: auto;
+        height: auto;
         max-width: 95vw;
+        max-height: none;
     }
 
     .image--medium {
-        max-width: 90vw;
+        width: auto;
         height: auto;
+        max-width: 90vw;
+        max-height: none;
     }
 
     .image--small {
-        max-width: 90vw;
+        width: auto;
         height: auto;
+        max-width: 90vw;
+        max-height: none;
     }
 }
 
