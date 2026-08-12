@@ -94,23 +94,27 @@ document.addEventListener("DOMContentLoaded", function () {
 // ======================================
 
 document.addEventListener("DOMContentLoaded", function () {
-  const grid = document.querySelector(".collections-grid");
-  if (!grid) return;
+    const grids = document.querySelectorAll(".collections-grid");
+    if (!grids.length) return;
 
-  // fallback vieux navigateurs
-  if (!("IntersectionObserver" in window)) {
-    grid.classList.add("is-visible");
-    return;
-  }
+    // Fallback vieux navigateurs
+    if (!("IntersectionObserver" in window)) {
+        grids.forEach(function (grid) {
+            grid.classList.add("is-visible");
+        });
+        return;
+    }
 
-  const io = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        grid.classList.add("is-visible");  // <- déclenche tout
-        obs.unobserve(grid);
-      }
+    const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    grids.forEach(function (grid) {
+        io.observe(grid);
     });
-  }, { threshold: 0.15 });
-
-  io.observe(grid);
 });

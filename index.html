@@ -82,23 +82,41 @@
 
   <section class="collections-section" aria-labelledby="collections-title">
     <div class="collections-inner">
-
-      <!--
-        GRILLE DE CARTES :
-        - .collections-grid : grille responsive (3 colonnes -> 2 -> 1 selon largeur).
-        - .collection-card : carte cliquable complète (a = lien).
-        - .fade-block : certaines cartes ont une animation “bloc” (opacité/translate).
-        - IMPORTANT : ton JS a aussi une logique “déclencher tout d’un coup” sur .collections-grid
-          (il ajoute .is-visible à la grille, ce qui révèle toutes les cartes en même temps).
-      -->
       <div class="collections-grid js-stagger-grid">
 
-        <!-- Carte 1 (lien vers collection1.html) -->
-        <a class="collection-card" href="projet1.html">
-          <!--
-            Icone ronde :
-            - .collection-icon : taille fixe + border radius en cercle + object-fit.
-          -->
+        <a class="collection-card fade-block" href="projet8.html">
+          <img class="collection-icon" src="assets/icons/icon8.png" alt="">
+          <div class="collection-meta">
+            <div class="collection-name">Le Cheminement De L'Infini</div>
+            <div class="collection-cta">Jeux-vidéo | Juin 2024</div>
+          </div>
+        </a>
+
+        <a class="collection-card fade-block" href="projet9.html">
+          <img class="collection-icon" src="assets/icons/icon9.png" alt="">
+          <div class="collection-meta">
+            <div class="collection-name">Les Temps Oniriques</div>
+            <div class="collection-cta">Jeux-vidéo | Juin 2024</div>
+          </div>
+        </a>
+        
+        <a class="collection-card fade-block" href="projet10.html">
+          <img class="collection-icon" src="assets/icons/icon10.png" alt="">
+          <div class="collection-meta">
+            <div class="collection-name">Le Secret Des Mers</div>
+            <div class="collection-cta">Animation 2D | Juin 2024</div>
+          </div>
+        </a>
+
+        <a class="collection-card fade-block" href="projet11.html">
+          <img class="collection-icon" src="assets/icons/icon11.png" alt="">
+          <div class="collection-meta">
+            <div class="collection-name">ClipWeb</div>
+            <div class="collection-cta">HTLM et Javascript | Juin 2024</div>
+          </div>
+        </a>
+
+        <a class="collection-card fade-block" href="projet1.html">
           <img class="collection-icon" src="assets/icons/icon1.png" alt="">
           <div class="collection-meta">
             <!-- Nom + petit CTA -->
@@ -107,7 +125,6 @@
           </div>
         </a>
 
-        <!-- Cartes suivantes : même structure, avec .fade-block pour l’animation -->
         <a class="collection-card fade-block" href="projet2.html">
           <img class="collection-icon" src="assets/icons/icon2.png" alt="">
           <div class="collection-meta">
@@ -148,13 +165,100 @@
           </div>
         </a>
 
-                <a class="collection-card fade-block" href="projet7.html">
+        <a class="collection-card fade-block" href="projet7.html">
           <img class="collection-icon" src="assets/icons/icon7.png" alt="">
           <div class="collection-meta">
             <div class="collection-name">La fênetres de la mémoire</div>
             <div class="collection-cta">Expérience VR | Juin 2026</div>
           </div>
         </a>
+
+      </div>
+    </div>
+  </section>
+
+  
+  
+  <div class="article__hero">
+    <h1 class="article__title reveal-chars">Autres Travaux</h1>
+  </div>
+
+  <section class="collections-section" aria-labelledby="collections-title">
+    <div class="collections-inner">
+      <div class="collections-grid js-stagger-grid">
+        
+        <a class="collection-card" href="travail4.html">
+          <img class="collection-icon" src="assets/icons/catharsis.png" alt="">
+          <div class="collection-meta">
+                <!-- Nom + petit CTA -->
+            <div class="collection-name">Catharsis</div>
+            <div class="collection-cta"></div>
+          </div>
+        </a>
+        
+        <a class="collection-card" href="travail5.html">
+          <img class="collection-icon" src="assets/icons/dessinsperso.png" alt="">
+          <div class="collection-meta">
+                <!-- Nom + petit CTA -->
+            <div class="collection-name">Autres dessins</div>
+            <div class="collection-cta"></div>
+          </div>
+        </a>
+        
+        <a class="collection-card" href="travail6.html">
+          <img class="collection-icon" src="assets/favicon.png" alt="">
+          <div class="collection-meta">
+                <!-- Nom + petit CTA -->
+            <div class="collection-name">Evernight | FloxSan</div>
+            <div class="collection-cta"></div>
+          </div>
+        </a>
+
+        <a class="collection-card" href="travail1.html">
+        <img class="collection-icon" src="assets/icons/anatomie.jpg" alt="">
+        <div class="collection-meta">
+                <!-- Nom + petit CTA -->
+            <div class="collection-name">Dessins d'anatomie</div>
+            <div class="collection-cta"></div>
+          </div>
+        </a>
+
+        <a class="collection-card" href="travail2.html">
+          <img class="collection-icon" src="assets/icons/naturemorte.jpg" alt="">
+          <div class="collection-meta">
+                <!-- Nom + petit CTA -->
+            <div class="collection-name">Nature mortes</div>
+            <div class="collection-cta"></div>
+          </div>
+        </a>
+
+        <a class="collection-card" href="travail3.html">
+          <img class="collection-icon" src="assets/icons/perspective.jpg" alt="">
+          <div class="collection-meta">
+                <!-- Nom + petit CTA -->
+            <div class="collection-name">Perspective</div>
+            <div class="collection-cta"></div>
+          </div>
+        </a>
+
+        <a class="collection-card" href="travail7.html">
+          <img class="collection-icon" src="assets/icons/orage.jpg" alt="">
+          <div class="collection-meta">
+                <!-- Nom + petit CTA -->
+            <div class="collection-name">photos orages</div>
+            <div class="collection-cta"></div>
+          </div>
+        </a>
+
+        <!-- 
+        <a class="collection-card" href="projet2.html">
+          <img class="collection-icon" src="assets/icons/icon2.png" alt="">
+          <div class="collection-meta">
+                
+            <div class="collection-name">Stage photogrammétrie</div>
+            <div class="collection-cta"></div>
+          </div>
+        </a>-->
 
       </div>
     </div>
@@ -169,15 +273,15 @@
     </a>
 
     <a href="https://www.youtube.com/channel/UCe4KETuQGzNhfvYsSoX4B8w" target="_blank">
-        <img src="assets/icons/youtube.png" class="site-logo" alt="Instagram">
+        <img src="assets/icons/youtube.png" class="site-logo" alt="YouTube">
     </a>
-
+<!-- Nom + petit CTA 
     <a href="https://www.artstation.com/flox_san" target="_blank">
-        <img src="assets/icons/artstation.png" class="site-logo" alt="Instagram">
-    </a>
+        <img src="assets/icons/artstation.png" class="site-logo" alt="ArtStation">
+    </a>-->
 
     <a href="https://www.linkedin.com/in/florian-thyssen-913b87392/" target="_blank">
-        <img src="assets/icons/linkedin.png" class="site-logo" alt="Instagram">
+        <img src="assets/icons/linkedin.png" class="site-logo" alt="Linkedin">
     </a>
 </div>
 
